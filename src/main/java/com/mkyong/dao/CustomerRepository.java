@@ -11,12 +11,15 @@ import java.util.stream.Stream;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    List<Customer> findByEmail(String email);
+    // List<Customer> findByEmail(String email);
 
-    @Query("select c from Customer c where c.email = :email")
-    Stream<Customer> findByEmailReturnStream(@Param("email") String email);
+    // @Query("select c from Customer c where c.email = :email")
+    // Stream<Customer> findByEmailReturnStream(@Param("email") String email);
+    //
+    // List<Customer> findByDate(Date date);
 
-    List<Customer> findByDate(Date date);
+    @Query(value = "select t.* from customer t where t.name = ?1",nativeQuery = true)
+    Customer getByInsProcId(@Param("name") String name);
 
     //@Query("select c from Customer c")
     //Stream<Customer> findAllAndStream();
